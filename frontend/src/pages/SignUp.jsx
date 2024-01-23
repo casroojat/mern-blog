@@ -1,7 +1,55 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 
 export default function SignUp() {
   return (
-    <div>SignUp</div>
+    <div className='min-h-screen mt-20'>
+      <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
+        {/* leftside */}
+        <div className="flex-1">
+          <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
+              <span className='px-2 py-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg text-white'>SIGN UP</span>
+              <span className="self-center whitespace-nowrap text-gray-700 text-xl font-bold dark:text-white"> SMART SETDA</span>
+          </Link>
+          <p className="mb-3 mt-5 text-justify text-gray-500 dark:text-gray-400">
+              Track work across the enterprise through an open, collaborative platform. Link issues across Jira and ingest
+            data from other software development tools, so your IT support and operations teams have richer contextual
+            information to rapidly respond to requests, incidents, and changes.
+          </p>
+          
+        </div>
+        {/* rightside */}
+        <div className="flex-1">
+          <form className="flex max-w-md flex-col gap-4">
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="username" value="Your username or NIP" />
+                </div>
+                <TextInput id="username" type="text" placeholder="Your username / NIP" required />
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="email" value="Your email" />
+                </div>
+                <TextInput id="email" type="email" placeholder="Your email" required />
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="password" value="Your password" />
+                </div>
+                <TextInput id="password" type="password" placeholder="Your password" required />
+              </div>
+              <Button gradientDuoTone='purpleToBlue' type="submit">Submit</Button>
+            </form>
+            <div className="flex gap-2 text-sm mt-5">
+              <span>Have an account? </span>
+              <Link to='/signin' className='text-blue-500'>
+                Sign In
+              </Link>
+            </div>
+        </div>
+      </div>
+    </div>
   )
 }
