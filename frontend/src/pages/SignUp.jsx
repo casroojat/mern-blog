@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
-import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { Button, Label, TextInput } from 'flowbite-react';
 
 export default function SignUp() {
+  const [formData, setFormData] = useState({});
+  const handleChange = (e) =>{
+    setFormData({...formData, [e.target.id]: e.target.value });
+  }
+  console.log(setFormData);
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    try {
+      const res = await fetch('http://localhost:3000/api/auth/signup', {
+        method:'POST',
+        headers: { 'Content-type': 'applicaion/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      
+    }
+  }
   return (
     <div className='min-h-screen mt-20'>
       <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
@@ -21,26 +40,26 @@ export default function SignUp() {
         </div>
         {/* rightside */}
         <div className="flex-1">
-          <form className="flex max-w-md flex-col gap-4">
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="username" value="Your username or NIP" />
+                  <Label value="Your username or NIP" />
                 </div>
-                <TextInput id="username" type="text" placeholder="Your username / NIP" required />
+                <TextInput id='username' type="text" placeholder="Your username / NIP" required onChange={handleChange}/>
               </div>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="email" value="Your email" />
+                  <Label value="Your email" />
                 </div>
-                <TextInput id="email" type="email" placeholder="Your email" required />
+                <TextInput id="email" type="email" placeholder="Your email" required onChange={handleChange}/>
               </div>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="password" value="Your password" />
+                  <Label value="Your password" />
                 </div>
-                <TextInput id="password" type="password" placeholder="Your password" required />
+                <TextInput id="password" type="password" placeholder="Your password" required onChange={handleChange}/>
               </div>
-              <Button gradientDuoTone='purpleToBlue' type="submit">Submit</Button>
+              <Button gradientDuoTone='purpleToBlue' type='submit'>Submit</Button>
             </form>
             <div className="flex gap-2 text-sm mt-5">
               <span>Have an account? </span>
